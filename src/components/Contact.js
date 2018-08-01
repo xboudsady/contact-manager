@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 // This is a class component not functional component, we have to use 'this.props' instead of just props
 class Contact extends Component {
@@ -15,5 +16,11 @@ class Contact extends Component {
         );
     }
 }
+
+Contact.propTypes = {
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired
+};
 
 export default Contact;
