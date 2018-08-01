@@ -1,9 +1,11 @@
 import React from "react";
 
-const Header = () => {
+// This is a functional component, we can just use 'props'
+const Header = props => {
+    const { branding } = props; // Using destructruing to having to pass in 'props' each time during the return
     return (
         <div>
-            <h1>Contact Manager</h1>
+            <h1>{branding}</h1>
         </div>
     );
 };
