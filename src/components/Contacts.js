@@ -32,11 +32,12 @@ class Contacts extends Component {
         const { contacts } = this.state;
 
         return (
-            <div>
+            // Fragments removes uncessary elements you don't need, here we take out the <div></div>
+            <React.Fragment>
                 {contacts.map(contact => (
                     <Contact key={contact.id} contact={contact} />
                 ))}
-            </div>
+            </React.Fragment>
         );
     }
 }
