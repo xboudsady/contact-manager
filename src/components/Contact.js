@@ -9,6 +9,11 @@ class Contact extends Component {
         showContactInfo: false
     };
 
+    // Adde this function for deleting the properties
+    onDeleteClick = () => {
+        this.props.deleteClickHandler();
+    };
+
     render() {
         const { name, email, phone } = this.props.contact; // We can extract value out of props, so we don't need to pass in 'this.props' each time
         const { showContactInfo } = this.state;
@@ -24,9 +29,20 @@ class Contact extends Component {
                             })
                         }
                         className="fas fa-sort-down"
+                        style={{ cursor: "pointer" }}
+                    />
+                    <i
+                        className="fas fa-times"
+                        style={{
+                            cursor: "pointer",
+                            float: "right",
+                            color: "red"
+                        }}
+                        // Add event listern to delete when icon is click
+                        onClick={this.onDeleteClick}
                     />
                 </h4>
-                {showContactInfo ? (
+                {showContactInfo ? ( // If this is true; show the content, if 'null' then hide
                     <ul className="list-group">
                         <li className="list-group-item">Email: {email}</li>
                         <li className="list-group-item">Phone: {phone}</li>
@@ -38,7 +54,8 @@ class Contact extends Component {
 }
 
 Contact.propTypes = {
-    contact: PropTypes.object.isRequired
+    contact: PropTypes.object.isRequired,
+    deleteClickHandler: PropTypes.func.isRequired
 };
 
 export default Contact;
