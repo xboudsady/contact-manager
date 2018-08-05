@@ -7,6 +7,14 @@ class AddContact extends Component {
         phone: ""
     };
 
+    onSubmit = e => {
+        // preventDefault() we don't want to actually submit by default
+        e.preventDefault();
+        console.log(this.state);
+    };
+
+    onChange = e => this.setState({ [e.target.name]: e.target.value });
+
     render() {
         // Destructuring to extrat key in state object
         const { name, email, phone } = this.state;
@@ -16,7 +24,7 @@ class AddContact extends Component {
             <div className="card mb-3">
                 <div className="card-header">Add Contact</div>
                 <div className="card-body">
-                    <form>
+                    <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
                             <input
@@ -26,6 +34,8 @@ class AddContact extends Component {
                                 placeholder="Enter Name..."
                                 // Will not be able to type in input field, until there is an onChange() event, because initial state is immutable
                                 value={name}
+                                // Use onChange property to and object to pass the function to change state
+                                onChange={this.onChange}
                             />
                         </div>
                         <div className="form-group">
@@ -36,6 +46,7 @@ class AddContact extends Component {
                                 className="form-control form-control-lg"
                                 placeholder="Enter Email..."
                                 value={email}
+                                onChange={this.onChange}
                             />
                         </div>
                         <div className="form-group">
@@ -46,6 +57,7 @@ class AddContact extends Component {
                                 className="form-control form-control-lg"
                                 placeholder="Enter Phone..."
                                 value={phone}
+                                onChange={this.onChange}
                             />
                         </div>
                         <input
