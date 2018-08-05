@@ -4,6 +4,7 @@ import React, { Component } from "react";
 const Context = React.createContext();
 
 // 'action' will be an object, and it will be a type; so that type we want to be evaluated
+// reducer to evaluate the action type
 const reducer = (state, action) => {
     switch (action.type) {
         case "DELETE_CONTACT":
@@ -51,7 +52,7 @@ export class Provider extends Component {
     };
 
     render() {
-        // We pass in the entire state so we can use it anywhere in our app
+        // We pass in the entire state so we can use it anywhere in our app, including props and functions
         return (
             <Context.Provider value={this.state}>
                 {this.props.children}

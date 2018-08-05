@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Consumer } from "../context";
+import { Consumer } from "../../context";
 
 // This is a class component not functional component, we have to use 'this.props' instead of just props
 class Contact extends Component {

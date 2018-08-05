@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Contact from "./Contact";
-import { Consumer } from "../context";
+import { Consumer } from "../../context";
 
 // We use class base component because we want to use 'state'
 class Contacts extends Component {
