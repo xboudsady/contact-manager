@@ -10,13 +10,19 @@ const reducer = (state, action) => {
         case "DELETE_CONTACT":
             return {
                 // take the existing state, using spread operatior
-                ...state,
-                // filter out the contact that needs to be filtered out
+                ...state, // filter out the contact that needs to be filtered out
                 contacts: state.contacts.filter(
-                    contact =>
-                        // payload is just some data we want to send along with our action, sending 'id' as the payload
-                        contact.id !== action.payload
+                    (
+                        contact // payload is just some data we want to send along with our action, sending 'id' as the payload
+                    ) => contact.id !== action.payload
                 )
+            };
+        case "ADD_CONTACT":
+            return {
+                // take the existing state, using spread operatior
+                ...state, // filter out the contact that needs to be filtered out
+                // Take 'contacts' which is the array of o
+                contacts: [action.payload, ...state.contacts]
             };
         default:
             return state;
