@@ -7,7 +7,9 @@ class AddContact extends Component {
     state = {
         name: "",
         email: "",
-        phone: ""
+        phone: "",
+        // Create an error object to catch and send message of error
+        errors: {}
     };
 
     onSubmit = (dispatch, e) => {
@@ -15,6 +17,22 @@ class AddContact extends Component {
         e.preventDefault();
 
         const { name, email, phone } = this.state;
+
+        // Check for Errors
+        if (name === "") {
+            this.setState({ errors: { name: "Name is required" } });
+            return;
+        }
+
+        if (email === "") {
+            this.setState({ errors: { email: "Email is required" } });
+            return;
+        }
+
+        if (phone === "") {
+            this.setState({ errors: { phone: "Phone is required" } });
+            return;
+        }
 
         // Construct a new contact object
         const newContact = {
@@ -31,7 +49,8 @@ class AddContact extends Component {
         this.setState({
             name: "",
             email: "",
-            phone: ""
+            phone: "",
+            errors: {}
         });
     };
 
@@ -39,7 +58,7 @@ class AddContact extends Component {
 
     render() {
         // Destructuring to extrat key in state object
-        const { name, email, phone } = this.state;
+        const { name, email, phone, errors } = this.state;
 
         return (
             <Consumer>
@@ -61,6 +80,7 @@ class AddContact extends Component {
                                         placeholder="Enter Name"
                                         value={name}
                                         onChange={this.onChange}
+                                        error={errors.name}
                                     />
                                     <TextInputGroup
                                         label="Email"
@@ -69,13 +89,15 @@ class AddContact extends Component {
                                         placeholder="Enter Email"
                                         value={email}
                                         onChange={this.onChange}
+                                        error={errors.email}
                                     />
                                     <TextInputGroup
-                                        label="Name"
+                                        label="Phone"
                                         name="phone"
                                         placeholder="Enter Phone"
                                         value={phone}
                                         onChange={this.onChange}
+                                        error={errors.phone}
                                     />
 
                                     <input
