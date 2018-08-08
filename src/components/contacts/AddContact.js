@@ -55,7 +55,6 @@ class AddContact extends Component {
     };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
-
     render() {
         // Destructuring to extrat key in state object
         const { name, email, phone, errors } = this.state;
