@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 // .createContext for our global state management rather than each individual compoents
 const Context = React.createContext();
@@ -32,30 +33,19 @@ const reducer = (state, action) => {
 export class Provider extends Component {
     // this is where we have our global state
     state = {
-        contacts: [
-            {
-                id: 1,
-                name: "John Doe",
-                email: "jdoe@gmail.com",
-                phone: "555-555-5555"
-            },
-            {
-                id: 2,
-                name: "Karen Williams",
-                email: "karen@gmail.com",
-                phone: "222-222-2222"
-            },
-            {
-                id: 3,
-                name: "Henry Johnson",
-                email: "henry@gmail.com",
-                phone: "111-111-1111"
-            }
-        ],
+        contacts: [],
         // When we have a consumer, it consume their entire state because that's what we're passing in.
         // We should be able to access 'dispatch' anywhere
         dispatch: action => this.setState(state => reducer(state, action))
     };
+
+    componentDidMount() {
+        axios.get("https://jsonplaceholder.typicode.com/users").then(res =>
+            this.setState({
+                contacts: res.data
+            })
+        );
+    }
 
     render() {
         // We pass in the entire state so we can use it anywhere in our app, including props and functions
