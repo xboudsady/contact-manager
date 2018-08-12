@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Consumer } from "../../context";
+import axios from "axios";
 
 // This is a class component not functional component, we have to use 'this.props' instead of just props
 class Contact extends Component {
@@ -12,8 +13,10 @@ class Contact extends Component {
 
     // Add this function for deleting the properties
     onDeleteClick = (id, dispatch) => {
+        axios
+            .delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+            .then(res => dispatch({ type: "DELETE_CONTACT", payload: id }));
         // takes in an action, which is a type
-        dispatch({ type: "DELETE_CONTACT", payload: id });
     };
 
     render() {
