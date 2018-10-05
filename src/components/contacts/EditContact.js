@@ -29,7 +29,39 @@ class AddContact extends Component {
         // preventDefault() we don't want to actually submit by default
         e.preventDefault();
 
+        const { name, email, phone } = this.state;
+
+        // Check for Errors
+        if (name === '') {
+            this.setState({ errors: { name: 'Name is required' } });
+            return;
+        }
+
+        if (email === '') {
+            this.setState({ errors: { email: 'Email is required' } });
+            return;
+        }
+
+        if (phone === '') {
+            this.setState({ errors: { phone: 'Phone is required' } });
+            return;
+        }
         
+
+        const updContact = {
+            name,
+            email,
+            phone
+        }
+
+        // We want to pull the id out of the url e.g. localhost:3000/contact/edit/1
+        const { id } = this.props.match.params;
+
+        // Use await because of the async, then send our updContact payload
+        const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updContact);
+
+        // Use the dispatch method to update contact, and pass in the payload.data above
+        dispatch({type:'UPDATE_CONTACT', payload: res.data});
         
         // Clear State
         this.setState({
